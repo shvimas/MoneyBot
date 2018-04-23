@@ -5,6 +5,5 @@ import (
 )
 
 func main() {
-	//teleBot.Debug = true
 	MoneyBot.DefaultBot.Run()
 }
