@@ -14,8 +14,8 @@ type MoneyBot struct {
 }
 
 func defaultBot() MoneyBot {
-	provider := FSProvider{DataPath} // FIXME: use DB
-	handler := teleBot.RequestHandler{Token: PrivateToken}
+	provider := FSProvider{dataPath} // FIXME: use DB
+	handler := teleBot.NewProxyRequestHandler(privateToken, proxyAddr, username, password)
 	chans := *NewLogChans()
 	return MoneyBot{Handler: handler, Provider: provider, Chans: chans}
 }
