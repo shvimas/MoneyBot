@@ -158,9 +158,9 @@ func (hist *history) Delete(name string) bool {
 func (hist history) ToString() string {
 	buf := bytes.Buffer{}
 	for name, container := range hist.Containers {
-		buf.WriteString("###")
+		buf.WriteString("### ")
 		buf.WriteString(name)
-		buf.WriteString("###\n")
+		buf.WriteString(" ###\n")
 		buf.WriteString(container.ToString())
 		buf.WriteString("\n\n")
 	}
