@@ -3,7 +3,7 @@ package MoneyBot
 import (
 	"encoding/json"
 	"strings"
-	"teleBot"
+	"github.com/shvimas/teleBot"
 	"os"
 	"strconv"
 	"bytes"

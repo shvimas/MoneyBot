@@ -1,7 +1,7 @@
 package MoneyBot
 
 import (
-	"teleBot"
+	"github.com/shvimas/teleBot"
 )
 
 const CacheSize = 100
@@ -17,7 +17,7 @@ type Cache struct {
 	chans LogChans
 }
 
-func NewCache(prov Provider) *Cache { return &Cache{users: make(map[int]cached), prov: prov} }
+//func NewCache(prov Provider) *Cache { return &Cache{users: make(map[int]cached), prov: prov} }
 
 func (cache Cache) Size() int {
 	return len(cache.users)

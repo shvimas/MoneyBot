@@ -2,7 +2,7 @@ package MoneyBot
 
 import (
 	"testing"
-	"teleBot"
+	"github.com/shvimas/teleBot"
 	"os"
 )
 

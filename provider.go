@@ -1,6 +1,6 @@
 package MoneyBot
 
-import "teleBot"
+import "github.com/shvimas/teleBot"
 
 type Provider interface {
 	Connect() error

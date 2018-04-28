@@ -1,7 +1,7 @@
 package MoneyBot
 
 import (
-	"teleBot"
+	"github.com/shvimas/teleBot"
 	"strconv"
 	"strings"
 	"errors"
