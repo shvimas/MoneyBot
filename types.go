@@ -47,6 +47,8 @@ func (user user) Serialize() ([]byte, error) {
 
 // ------------------------------------------------------------------------------------
 
+const totalField = "total"
+
 type container struct {
 	Id      int
 	Amounts map[string]float64
@@ -67,10 +69,12 @@ func (cont container) Size() int {
 func (cont *container) Add(category string, amount float64) error {
 	// zero values!
 	cont.Amounts[strings.ToLower(category)] += amount
+	cont.Amounts[totalField] += amount
 	return nil
 }
 
 func (cont *container) Delete(category string) error {
+	cont.Amounts[totalField] -= cont.Amounts[category]
 	delete(cont.Amounts, strings.ToLower(category))
 	return nil
 }
@@ -82,24 +86,26 @@ func (cont *container) Erase() error {
 
 func (cont container) ToString() string {
 	buf := bytes.Buffer{}
-	// NOT MONOSPACE FONT
-	//maxLen := 0
-	//for category := range cont.Amounts {
-	//	if len(category) > maxLen {
-	//		maxLen = len(category)
-	//	}
-	//}
 	for category, amount := range cont.Amounts {
-		buf.WriteString(category)
-		//buf.WriteString(strings.Repeat(" ", maxLen + 2 - len(category)))
-		buf.WriteString(": ")
-		buf.WriteString(strconv.FormatFloat(amount, 'f', 0, 64))
-		buf.WriteString("\n")
+		if category != totalField {
+			add(&buf, category, amount)
+		}
+	}
+	if total, ok := cont.Amounts[totalField]; ok {
+		buf.WriteString("-------\n")
+		add(&buf, totalField, total)
 	}
 	if buf.Len() == 0 {
 		buf.WriteString("<empty>")
 	}
 	return buf.String()
+}
+
+func add(buf *bytes.Buffer, category string, amount float64) {
+	buf.WriteString(category)
+	buf.WriteString(": ")
+	buf.WriteString(strconv.FormatFloat(amount, 'f', 0, 64))
+	buf.WriteString("\n")
 }
 
 func (cont container) String() string {
